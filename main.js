@@ -8,6 +8,10 @@ function save_erase(TargetDiv,mode){
     TargetDiv.innerHTML = ""; //erase the previous content of the div
 }
 
+function sold(ItemId){
+	
+}
+
 function switch_general(TargetDiv){
     save_erase(TargetDiv,0);
     var db = new alasql.Database();
@@ -42,20 +46,29 @@ function switch_general(TargetDiv){
     ];
     // Above code is for debug test, will be corrected later when edit function is developed
     
-    // generate the table for sell item selection
+    // generate the table for sell item selection with innerHTML
+    /* Rendering table with innerHTML is deprecated since it is unstable, slowers the speed and could break the whole system down
     TargetDiv.innerHTML += '<table width="49%">';
     for (i in db.tables.Sell_Items.data){
-        if (i%3==1){
+        if (i%3==0){
             TargetDiv.innerHTML += "<tr>";
         }
+        TargetDiv.innerHTML += '<td><input ' + db.tables.Sell_Items.data[i].number==0?'disabled="disabled"':'' + ' onclick="sold('+i.toString()+')" '+'type="button" id="'+ db.tables.Sell_Items.data[i].name + '_sold_btn" ' + 'value="' + db.tables.Sell_Items.data[i].name + ' $' + db.tables.Sell_Items.data[i].price.toString() +'"></td>';
+        if (i % 3 == 2 || i == db.tables.Sell_Items.data.length) {
+        	
+        	TargetDiv.innerHTML += "</tr>";
+        }
     }
-    
     TargetDiv.innerHTML += "</table>";
     
     //generate the table for borrow item selection
     TargetDiv.innerHTML += '<table width="49%>';
     
-    document.getElementById(id).innerHTML += "</table>";
+    TargetDiv.innerHTML += "</table>";
     
-    document.getElementById(id).innerHTML += "<br/>";
+    TargetDiv.innerHTML += "<br/>";
+    */
+   
+   // generate the table for item selection with HTML DOM append child method
+   
 }

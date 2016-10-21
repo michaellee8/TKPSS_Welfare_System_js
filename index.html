@@ -15,18 +15,18 @@
             developed by Michael Lee in 2016
         </p>
 
-        <div id="div_main" ng-app="main">
+        <div id="div_main">
             <div id="div_mode_selection">
                 <table width="100%" height="40vh">
                     <tr>
                         <td width="33.3%" >
-                            <input class="mode_button" id="bn_general" type="button" onclick="switch_general(document.getElementById(div_panel))" value="Switch to General Mode"/>
+                            <input class="mode_button" id="bn_general" type="button" onclick='switch_general(document.getElementById("div_panel"))' value="Switch to General Mode"/>
                         </td>
                         <td width="33.3%" >
-                            <input class="mode_button" id="bn_edit" type="button" onclick="switch_edit(document.getElementById(div_panel))" value="Switch to Edit Mode"/>
+                            <input class="mode_button" id="bn_edit" type="button" onclick='switch_edit(document.getElementById("div_panel"))' value="Switch to Edit Mode"/>
                         </td>
                         <td width="33.3%" >
-                            <input class="mode_button" id="bn_report" type="button" onclick="switch_report(document.getElementById(div_panel))" value="Switch to Report Mode"/>
+                            <input class="mode_button" id="bn_report" type="button" onclick='switch_report(document.getElementById("div_panel"))' value="Switch to Report Mode"/>
                         </td>
                     </tr>
                 </table>
