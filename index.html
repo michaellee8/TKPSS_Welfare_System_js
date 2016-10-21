@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Tin Ka Pin Secondary School Student Union Welfare Department Management System</title>
-		<link rel="stylesheet" type="text/css" href="theme.css">
-		<script src="alasql.min.js"></script>
-		<script src="jquery-3.1.1.min.js"></script>
-		<script src="main.js"></script>
-	</head>
-	<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tin Ka Pin Secondary School Student Union Welfare Department Management System</title>
+        <link rel="stylesheet" type="text/css" href="theme.css">
+        <script src="alasql.min.js"></script>
+        <script src="jquery-3.1.1.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
 
-		<h1>Tin Ka Pin Secondary School Student Union Welfare Department Management System</h1>
-		<p>
-			developed by Michael Lee in 2016
-		</p>
+        <h1>Tin Ka Pin Secondary School Student Union Welfare Department Management System</h1>
+        <p>
+            developed by Michael Lee in 2016
+        </p>
 
-		<div id="div_main">
-			<div id="div_mode_selection">
-				<table width="100%" height="40vh">
-					<tr>
-						<td width="33.3%" >
-						<input class="mode_button" id="bn_general" type="button" onclick='switch_general("div_panel")' value="Switch to General Mode"/>
-						</td>
-						<td width="33.3%" >
-						<input class="mode_button" id="bn_edit" type="button" onclick='switch_edit("div_panel")' value="Switch to Edit Mode"/>
-						</td>
-						<td width="33.3%" >
-						<input class="mode_button" id="bn_report" type="button" onclick='switch_report("div_panel")' value="Switch to Report Mode"/>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<br/>
-			<div id="div_panel">
+        <div id="div_main">
+            <div id="div_mode_selection">
+                <table width="100%" height="40vh">
+                    <tr>
+                        <td width="50%" >
+                        <button class="mode_button" id="bn_edit" onclick='switch_edit("div_panel")'>
+                            Edit Mode
+                        </button></td>
+                        <td width="50%" >
+                        <button class="mode_button" id="bn_report" onclick='switch_report("div_panel")'>
+                            Report Mode
+                        </button></td>
+                    </tr>
+                </table>
+                <table width="100%" height="40vh">
+                    <tr>
+                        <td width="33.3%" >
+                        <button class="mode_button" id="bn_sell" onclick='switch_sell("div_panel")'>
+                            Sell Mode
+                        </button></td>
+                        <td width="33.3%" >
+                        <button class="mode_button" id="bn_borrow" onclick='switch_borrow("div_panel")'>
+                            Borrow Mode
+                        </button></td>
+                        <td width="33.3%" >
+                        <button class="mode_button" id="bn_return" onclick='switch_return("div_panel")'>
+                            Return Mode
+                        </button></td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <div id="div_panel">
 
-			</div>
-		</div>
+            </div>
+        </div>
 
-	</body>
+    </body>
 </html>
