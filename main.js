@@ -2,18 +2,19 @@
 
 var CurrentMode = 0; // 0 -> general, 1 -> edit, 2 -> report
 
-function save_erase(TargetDiv,mode){
+function save_erase(id,mode){
  // prev[CurrentMode] = documenet.getElementById(id).innerHTML;
     CurrentMode = mode;
-    TargetDiv.innerHTML = ""; //erase the previous content of the div
+    document.getElementById(id).innerHTML = ""; //erase the previous content of the div
 }
 
 function sold(ItemId){
 	
 }
 
-function switch_general(TargetDiv){
-    save_erase(TargetDiv,0);
+function switch_general(id){
+	if (window.onload){
+    save_erase(document.getElementById(id),0);
     var db = new alasql.Database();
     
     // Below code is for debug test, will be corrected later when edit function is developed
@@ -48,27 +49,37 @@ function switch_general(TargetDiv){
     
     // generate the table for sell item selection with innerHTML
     /* Rendering table with innerHTML is deprecated since it is unstable, slowers the speed and could break the whole system down
-    TargetDiv.innerHTML += '<table width="49%">';
+    document.getElementById(id).innerHTML += '<table width="49%">';
     for (i in db.tables.Sell_Items.data){
         if (i%3==0){
-            TargetDiv.innerHTML += "<tr>";
+            document.getElementById(id).innerHTML += "<tr>";
         }
-        TargetDiv.innerHTML += '<td><input ' + db.tables.Sell_Items.data[i].number==0?'disabled="disabled"':'' + ' onclick="sold('+i.toString()+')" '+'type="button" id="'+ db.tables.Sell_Items.data[i].name + '_sold_btn" ' + 'value="' + db.tables.Sell_Items.data[i].name + ' $' + db.tables.Sell_Items.data[i].price.toString() +'"></td>';
+        document.getElementById(id).innerHTML += '<td><input ' + db.tables.Sell_Items.data[i].number==0?'disabled="disabled"':'' + ' onclick="sold('+i.toString()+')" '+'type="button" id="'+ db.tables.Sell_Items.data[i].name + '_sold_btn" ' + 'value="' + db.tables.Sell_Items.data[i].name + ' $' + db.tables.Sell_Items.data[i].price.toString() +'"></td>';
         if (i % 3 == 2 || i == db.tables.Sell_Items.data.length) {
         	
-        	TargetDiv.innerHTML += "</tr>";
+        	document.getElementById(id).innerHTML += "</tr>";
         }
     }
-    TargetDiv.innerHTML += "</table>";
+    document.getElementById(id).innerHTML += "</table>";
     
     //generate the table for borrow item selection
-    TargetDiv.innerHTML += '<table width="49%>';
+    document.getElementById(id).innerHTML += '<table width="49%>';
     
-    TargetDiv.innerHTML += "</table>";
+    document.getElementById(id).innerHTML += "</table>";
     
-    TargetDiv.innerHTML += "<br/>";
+    document.getElementById(id).innerHTML += "<br/>";
     */
    
-   // generate the table for item selection with HTML DOM append child method
-   
+   // generate the drop down list for item selection with HTML DOM append child method
+   var form = document.createElement("form");
+   form.setAttribute("id","sell_item_selection_form");
+   var sell_select_item = document.createElement("select");
+   sell_select_item.setAttribute("id","sell_item_selector");
+   $("#sell_item_selector").append(jQuery('<option>',{id:'sell_item_selector_option_'+'nothing',value:'nothing',text:'Nothing'}));
+   for (i in db.tables.Sell_Items.data){
+   	   $("#sell_item_selector").append(jQuery('<option>',{id:'sell_item_selector_option_'+db.tables.Sell_Items.data[i].name,value:db.tables.Sell_Items.data[i].name,text:db.tables.Sell_Items.data[i].name}));
+   }
+   $('#sell_item_selection_form').append($('#sell_item_selector'));
+   $('#'+id).append($('#sell_item_selection_form'));
+  }
 }
