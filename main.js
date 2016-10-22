@@ -59,12 +59,26 @@ function save_erase(id, mode) {
     //erase the previous content of the target div
 }
 
-function sold(name, number) {
-
+function sold(name, number, db, id) {
+    var number_left = db.exec('SELECT number FROM Sell_Items WHERE name = "' + name+'"')[0].number;
+    if (number > number_left) {
+        alert('Only ' + number_left.toString() + ' in stock, not enough goods in stock, buy less');
+    } else if (number <= 0) {
+        alert('Are you kidding me? Buy more than 0 goods please');
+    } else {
+        var really_buy = confirm('Are you realy going to buy ' + number + ' of ' + name + ' with $' + ((db.exec('SELECT price FROM Sell_Items WHERE name = "' + name+'"')[0].price) * number).toString() + ' ?');
+        if (really_buy) {
+            db.exec('UPDATE Sell_Items SET number = ' + (number_left - number).toString() + ' WHERE name = "' + name + '"');
+            alert('Transaction success, ' + number.toString() + ' of ' + name + ' sold ,' + db.exec('SELECT number FROM Sell_Items WHERE name = "' + name+'"')[0].number.toString() + ' left');
+            switch_sell(id);
+        } else {
+            alert('Select item again then');
+        }
+    }
 }
 
 function getListText(name, price, number) {
-    return name + '  Price: $' + price + '  Number left: ' + number;
+    return name + '    Price: $' + price + '    Number left: ' + number;
 }
 
 function switch_sell(id) {
@@ -98,7 +112,7 @@ function switch_sell(id) {
         id : "sell_confirm",
         text : "confirm",
         type : "button",
-        onclick : 'sold(sell_select_item.value,sell_number.value)'
+        onclick : 'sold(document.getElementById("sell_item_selector").value,document.getElementById("sell_number").value,db,"' + id.toString() + '")'
     }));
     $('#' + id).append(form);
 }
