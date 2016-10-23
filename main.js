@@ -14,6 +14,33 @@ alasql('CREATE DATABASE IF NOT EXISTS SUWD');
 // alasql('ATTACH localStorage DATABASE suwd AS SUWD');
 var db = alasql.Database('SUWD');
 
+var download = function(content, fileName, mimeType) {
+	var a = document.createElement('a');
+	mimeType = mimeType || 'application/octet-stream';
+
+	if (navigator.msSaveBlob) {// IE10
+		return navigator.msSaveBlob(new Blob([content], {
+			type : mimeType
+		}), fileName);
+	} else if ('download' in a) {//html5 A[download]
+		a.href = 'data:' + mimeType + ',' + encodeURIComponent(content);
+		a.setAttribute('download', fileName);
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		return true;
+	} else {//do iframe dataURL download (old ch+FF):
+		var f = document.createElement('iframe');
+		document.body.appendChild(f);
+		f.src = 'data:' + mimeType + ',' + encodeURIComponent(content);
+
+		setTimeout(function() {
+			document.body.removeChild(f);
+		}, 333);
+		return true;
+	}
+};
+
 function lssave(name) {
 	localStorage.setItem('SUWDdb.' + name, JSON.stringify(db.tables[name].data));
 	return JSON.stringify(db.tables[name].data);
@@ -26,7 +53,7 @@ function lsload(name) {
 
 function _init_() {
 	// Below code is for debug test, will be corrected later when edit function is developed
-	db.exec("CREATE TABLE IF NOT EXISTS Sell_Items (name STRING, gid STRING, number INT, price FLOAT)");
+	db.exec("CREATE TABLE IF NOT EXISTS Sell_Items (name STRING, gid STRING, number integer, price FLOAT)");
 
 	lsload('Sell_Items');
 	if (db.tables.Sell_Items.data.length == 0) {
@@ -100,13 +127,14 @@ function _init_() {
 		lssave('Student_Helpers');
 	}
 
-	db.exec("CREATE TABLE IF NOT EXISTS Sell_Records (gid STRING, number INT, total_price FLOAT, hid STRING, remark STRING, record_datetime STRING)");
+	db.exec("CREATE TABLE IF NOT EXISTS Sell_Records (gid STRING, number integer, total_price FLOAT, hid STRING, remark STRING, record_datetime STRING)");
 	lsload('Sell_Records');
 
 	// Above code is for debug test, will be corrected later when edit hidfunction is developed
 }
 
 function sold(gid, number, hid, remark, db, id) {
+	number = parseInt(number);
 	if (gid == "nothing") {
 		alert('Nothing cost nothing, never buy nothing');
 	} else if (hid == "nobody") {
@@ -208,17 +236,66 @@ function switch_sell(id) {
 }
 
 function console_run(command) {
-	$('#output').append('<<<  ' + command + '\n');
+
 	var output = ">>>  ";
-	try {
-		output += JSON.stringify(db.exec(command), null, 4);
-	} catch(err) {
-		output += 'Error: ' + err.message;
-	} finally {
-		output += "\n";
-		$('#output').append(output);
-		$('#output').scrollTop($('#output')[0].scrollHeight);
+	if (command.toLowerCase() == 'clear') {
+		$('#output').html("");
+		$('#output').append('Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Michael Lee in 2016\n');
+		output += 'Console cleared';
+	} else if (command.toLowerCase() == 'localstorage clear') {
+		if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
+			localStorage.clear();
+			output += 'localStorage cleared!!! Well, you have just destoryed everything';
+		} else {
+			output += 'Saved from destory! localStorage is not cleared';
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'lssave') {
+		try {
+			output += lssave(command.split(' ')[1]);
+		} catch(err) {
+			output += 'Save to Local Storage Error: ' + err.message;
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'lsload') {
+		try {
+			output += JSON.stringify(lsload(command.split(' ')[1]));
+		} catch(err) {
+			output += 'Load from Local Storage Error: ' + err.message;
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'export') {
+		try {
+			var source_table = db.tables[command.split(' ')[1]].data;
+			download(Papa.unparse(source_table, {
+				dynamicTyping : true,
+				quotes : (function(table) {
+					var boolArray = [];
+					for (key in table[0]) {
+						boolArray.push(( typeof table[0][key]) == "string");
+					}
+					return boolArray;
+				})(source_table)
+			}), (command.split(' ')[2] != undefined ? command.split(' ')[2] : ('SUWDdb-' + command.split(' ')[1])) + '.csv', 'text/csv');
+			output += 'Export Data of table ' + command.split(' ')[1] + ' Success';
+		} catch(err) {
+			output += 'Export Data Error: ' + err.message;
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'import') {
+		output += 'import (not yet implemented)';
+	} else if (command.split(' ')[0].toLowerCase() == 'backup') {
+		output += 'backup (not yet implemented)';
+	} else if (command.split(' ')[0].toLowerCase() == 'restore') {
+		output += 'restore (not yet implemented)';
+	} else {
+		try {
+			output += JSON.stringify(db.exec(command), null, "  ");
+		} catch(err) {
+			output += 'SQL Error: ' + err.message;
+		}
 	}
+	output += "\n";
+	$('#output').append('<<<  ' + command + '\n');
+	$('#output').append(output);
+	$('#output').scrollTop($('#output')[0].scrollHeight);
+
 }
 
 function switch_console(id) {
@@ -231,7 +308,7 @@ function switch_console(id) {
 		"margin" : "0px",
 		"width" : "100%",
 		"height" : "300px"
-	}));
+	}).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Michael Lee in 2016\n"));
 	$('#' + id).append('<br/><br/>');
 	$('#' + id).append('SQL command input: <br/>');
 	$('#' + id).append($('<input></input>', {
@@ -240,6 +317,7 @@ function switch_console(id) {
 	}).css({
 		"margin" : "0px",
 		"width" : "100%",
+		"font-family" : "monospace"
 	}).keyup(function(e) {
 		if (e.keyCode === 13) {
 			var command = $('#input').val();
