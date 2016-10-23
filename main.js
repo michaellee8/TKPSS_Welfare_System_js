@@ -2,6 +2,12 @@
 
 var CurrentMode = 0;
 // 1 -> edit, 2 -> report, 3 -> sell, 4 -> borrow, 5 -> return
+function save_erase(id, mode) {
+	// prev[CurrentMode] = documenet.getElementById(id).innerHTML;
+	CurrentMode = mode;
+	document.getElementById(id).innerHTML = "";
+	//erase the previous content of the target div
+}
 
 alasql('CREATE DATABASE IF NOT EXISTS SUWD');
 // alasql('CREATE localStorage DATABASE IF NOT EXISTS suwd');
@@ -21,23 +27,6 @@ function lsload(name) {
 function _init_() {
 	// Below code is for debug test, will be corrected later when edit function is developed
 	db.exec("CREATE TABLE IF NOT EXISTS Sell_Items (name STRING, gid STRING, number INT, price FLOAT)");
-
-	// deprecated since this approach cannot watch the change via sql statements
-	/*var Sell_Items_proxy_handler = new Proxy(db.tables.Sell_Items, {
-	 set : function(target, property, value, receiver) {
-	 if (property == 'data') {
-	 localStorage.setItem('SUWD_Sell_Items_data', JSON.stringify(db.tables.Sell_Items.data));
-	 }
-	 target[property] = value;
-	 return true;
-	 },
-	 get : function(target, property, receiver) {
-	 if (property == 'data') {
-	 db.tables.Sell_Items.data = JSON.parse(localStorage.getItem('SUWD_Sell_Items_data'));
-	 }
-	 return target[property];
-	 }
-	 });*/
 
 	lsload('Sell_Items');
 	if (db.tables.Sell_Items.data.length == 0) {
@@ -94,54 +83,37 @@ function _init_() {
 		}];
 		lssave('Sell_Items');
 	}
-	db.exec("CREATE TABLE IF NOT EXISTS Student_Helpers (name STRING, sid STRING)");
-
-	// deprecated since this approach cannot watch the change via sql statements
-	/*var Student_Helpers_proxy_handler = new Proxy(db.tables.Student_Helpers, {
-	 set : function(target, property, value, receiver) {
-	 if (property == 'data') {
-	 localStorage.setItem('SUWD_Student_Helpers_data', JSON.stringify(db.tables.Student_Helpers.data));
-	 }
-	 target[property] = value;
-	 return true;
-	 },
-	 get : function(target, property, receiver) {
-	 if (property == 'data') {
-	 db.tables.Student_Helpers.data = JSON.parse(localStorage.getItem('SUWD_Student_Helpers_data'));
-	 }
-	 return target[property];
-	 }
-	 });*/
+	db.exec("CREATE TABLE IF NOT EXISTS Student_Helpers (name STRING, hid STRING)");
 
 	lsload('Student_Helpers');
 	if (db.tables.Student_Helpers.data.length == 0) {
 		db.tables.Student_Helpers.data = [{
 			name : 'student01',
-			sid : 'stu01'
+			hid : 'stu01'
 		}, {
 			name : 'student02',
-			sid : 'stu02'
+			hid : 'stu02'
 		}, {
 			name : 'others',
-			sid : 'stuo'
+			hid : 'stuo'
 		}];
 		lssave('Student_Helpers');
 	}
-	// Above code is for debug test, will be corrected later when edit function is developed
+
+	db.exec("CREATE TABLE IF NOT EXISTS Sell_Records (gid STRING, number INT, total_price FLOAT, hid STRING, remark STRING, record_datetime STRING)");
+	lsload('Sell_Records');
+
+	// Above code is for debug test, will be corrected later when edit hidfunction is developed
 }
 
-function save_erase(id, mode) {
-	// prev[CurrentMode] = documenet.getElementById(id).innerHTML;
-	CurrentMode = mode;
-	document.getElementById(id).innerHTML = "";
-	//erase the previous content of the target div
-}
-
-function sold(gid, number, sid, remark, db, id) {
+function sold(gid, number, hid, remark, db, id) {
 	if (gid == "nothing") {
 		alert('Nothing cost nothing, never buy nothing');
+	} else if (hid == "nobody") {
+		alert('Stop singing, this computer is going to break because of your "wonderful" voice');
 	} else {
 		lsload('Sell_Items');
+		lsload('Sell_Records');
 		var number_left = db.exec('SELECT number FROM Sell_Items WHERE gid = "' + gid +'"')[0].number;
 		if (number > number_left) {
 			alert('Only ' + number_left.toString() + ' in stock, not enough goods in stock, buy less');
@@ -152,6 +124,15 @@ function sold(gid, number, sid, remark, db, id) {
 			if (really_buy) {
 				db.exec('UPDATE Sell_Items SET number = ' + (number_left - number).toString() + ' WHERE gid = "' + gid + '"');
 				lssave('Sell_Items');
+				db.tables.Sell_Records.data.push({
+					gid : gid,
+					number : number,
+					total_price : ((db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid +'"')[0].price) * number),
+					hid : hid,
+					remark : remark,
+					record_datetime : Date().toString()
+				});
+				lssave('Sell_Records');
 				alert('Transaction success, ' + number.toString() + ' of ' + name + ' sold ,' + db.exec('SELECT number FROM Sell_Items WHERE gid = "' + gid +'"')[0].number.toString() + ' left');
 				switch_sell(id);
 			} else {
@@ -203,9 +184,9 @@ function switch_sell(id) {
 	}));
 	for (i in db.tables.Student_Helpers.data) {
 		$(student_helper_select).append($('<option></option>', {
-			id : 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].sid,
-			value : db.tables.Student_Helpers.data[i].sid,
-			text : db.tables.Student_Helpers.data[i].sid + ' ' + db.tables.Student_Helpers.data[i].name
+			id : 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
+			value : db.tables.Student_Helpers.data[i].hid,
+			text : db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
 		}));
 	}
 	$(form).append(student_helper_select);
@@ -224,4 +205,48 @@ function switch_sell(id) {
 	}));
 
 	$('#' + id).append(form);
+}
+
+function console_run(command) {
+	$('#output').append('<<<  ' + command + '\n');
+	var output = ">>>  ";
+	try {
+		output += JSON.stringify(db.exec(command), null, 4);
+	} catch(err) {
+		output += 'Error: ' + err.message;
+	} finally {
+		output += "\n";
+		$('#output').append(output);
+		$('#output').scrollTop($('#output')[0].scrollHeight);
+	}
+}
+
+function switch_console(id) {
+	save_erase(id, 1);
+	$('#' + id).append('Output: <br/>');
+	$('#' + id).append($('<textarea></textarea>', {
+		id : "output",
+		readonly : "readonly"
+	}).css({
+		"margin" : "0px",
+		"width" : "100%",
+		"height" : "300px"
+	}));
+	$('#' + id).append('<br/><br/>');
+	$('#' + id).append('SQL command input: <br/>');
+	$('#' + id).append($('<input></input>', {
+		id : "input",
+		type : "text"
+	}).css({
+		"margin" : "0px",
+		"width" : "100%",
+	}).keyup(function(e) {
+		if (e.keyCode === 13) {
+			var command = $('#input').val();
+			$('#input').val("");
+			console_run(command);
+		}
+	}));
+	$('#' + id).append('<br/><br/>');
+
 }
