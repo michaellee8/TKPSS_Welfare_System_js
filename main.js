@@ -293,7 +293,7 @@ function console_run(command) {
 		output += "\n" + JSON.stringify(console_command_history, null, ' ');
 	} else {
 	    if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
-	        if !(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
+	        if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
                 command = "";
 			output += '>>> Command droped for dangerous operation\n';
 		}
