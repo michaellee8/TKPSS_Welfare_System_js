@@ -1,5 +1,8 @@
 // var prev = ["","",""];
 
+var console_command_history = [];
+var console_command_history_curentIndex = -1;
+
 var CurrentMode = 0;
 // 1 -> edit, 2 -> report, 3 -> sell, 4 -> borrow, 5 -> return
 function save_erase(id, mode) {
@@ -236,7 +239,9 @@ function switch_sell(id) {
 }
 
 function console_run(command) {
-
+    
+    console_command_history.push(command);
+    console_command_history_currentIndex = console_command_history.length - 1;
 	var output = ">>>  ";
 	if (command.toLowerCase() == 'clear') {
 		$('#output').html("");
@@ -284,6 +289,8 @@ function console_run(command) {
 		output += 'backup (not yet implemented)';
 	} else if (command.split(' ')[0].toLowerCase() == 'restore') {
 		output += 'restore (not yet implemented)';
+	} else if (command.toLowerCase() == 'history') {
+		output += JSON.stringify(console_command_history, null, ' ');
 	} else {
 		try {
 			output += JSON.stringify(db.exec(command), null, "  ");
@@ -323,6 +330,18 @@ function switch_console(id) {
 			var command = $('#input').val();
 			$('#input').val("");
 			console_run(command);
+		}
+	}).keydown(function(e){
+	    if (e.keyCode == 38) { // pressing upArrow
+			console_command_history_currentIndex = console_command_history_currentIndex > 0 ? console_command_history_currentIndex - 1 : 0;
+			if ((typeof console_command_history[console_command_history_currentIndex]) == 'string'){
+			    $('#input').val(console_command_history[console_command_history_currentIndex]);
+			}
+		} else if (e.keyCode == 40) { // pressing downArrow
+            console_command_history_currentIndex = (console_command_history_currentIndex + 1) < console_command_history.length ? console_command_history_currentIndex + 1 : console_command_history.length - 1;
+			if ((typeof console_command_history[console_command_history_currentIndex]) == 'string'){
+			    $('#input').val(console_command_history[console_command_history_currentIndex]);
+			}
 		}
 	}));
 	$('#' + id).append('<br/><br/>');
