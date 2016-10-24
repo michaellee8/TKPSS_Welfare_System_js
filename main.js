@@ -323,7 +323,7 @@ function switch_console(id) {
 		"height" : "300px"
 	}).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Michael Lee in 2016\n"));
 	$('#' + id).append('<br/><br/>');
-	$('#' + id).append('SQL command input: <br/>');
+	$('#' + id).append('Command input: <br/>');
 	$('#' + id).append($('<input></input>', {
 		id : "input",
 		type : "text"
