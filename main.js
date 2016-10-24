@@ -290,10 +290,10 @@ function console_run(command) {
 	} else if (command.split(' ')[0].toLowerCase() == 'restore') {
 		output += 'restore (not yet implemented)';
 	} else if (command.toLowerCase() == 'history') {
-		output += JSON.stringify(console_command_history, null, ' ');
+		output += "\n" + JSON.stringify(console_command_history, null, ' ');
 	} else {
 		try {
-			output += JSON.stringify(db.exec(command), null, "  ");
+			output += "\n" + JSON.stringify(db.exec(command), null, "  ");
 		} catch(err) {
 			output += 'SQL Error: ' + err.message;
 		}
