@@ -322,7 +322,7 @@ function switch_console(id) {
 	}).css({
 		"margin" : "0px",
 		"width" : "100%",
-		"height" : "60vh"
+		"height" : "50vh"
 	}).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n"));
 	$('#' + id).append('<br/><br/>');
 	$('#' + id).append('Command input: <br/>');
