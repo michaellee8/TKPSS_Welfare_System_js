@@ -240,9 +240,10 @@ function switch_sell(id) {
 
 function console_run(command) {
     
-    console_command_history.push(command);
-    console_command_history_currentIndex = console_command_history.length - 1;
-	var output = ">>>  ";
+  console_command_history.push(command);
+  console_command_history_currentIndex = console_command_history.length - 1;
+	$('#output').append('<<<  ' + command + '\n');
+	var output = "";
 	if (command.toLowerCase() == 'clear') {
 		$('#output').html("");
 		$('#output').append('Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n');
@@ -292,10 +293,10 @@ function console_run(command) {
 	} else if (command.toLowerCase() == 'history') {
 		output += "\n" + JSON.stringify(console_command_history, null, ' ');
 	} else {
-	    if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
-	        if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
-                        command = "";
-			output += '>>> Command droped for dangerous operation\n';
+	  if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
+	    if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
+    		command = "";
+				$('#output').append('>>> Command droped for dangerous operation\n');
 		}
 	    }
 		try {
@@ -305,7 +306,7 @@ function console_run(command) {
 		}
 	}
 	output += "\n";
-	$('#output').append('<<<  ' + command + '\n');
+
 	$('#output').append(output);
 	$('#output').scrollTop($('#output')[0].scrollHeight);
 
