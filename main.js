@@ -240,12 +240,13 @@ function switch_sell(id) {
 
 function console_run(command) {
     
-    console_command_history.push(command);
-    console_command_history_currentIndex = console_command_history.length - 1;
+  console_command_history.push(command);
+  console_command_history_currentIndex = console_command_history.length - 1;
+	$('#output').append('<<<  ' + command + '\n');
 	var output = ">>>  ";
 	if (command.toLowerCase() == 'clear') {
 		$('#output').html("");
-		$('#output').append('Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Michael Lee in 2016\n');
+		$('#output').append('Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n');
 		output += 'Console cleared';
 	} else if (command.toLowerCase() == 'localstorage clear') {
 		if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
@@ -292,12 +293,13 @@ function console_run(command) {
 	} else if (command.toLowerCase() == 'history') {
 		output += "\n" + JSON.stringify(console_command_history, null, ' ');
 	} else {
-	    if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
-	        if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
-                command = "";
-		  	    output += '>>> Command droped for dangerous operation\n';
-    		}
-	    }
+	  if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
+	    if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
+    		command = "";
+				$('#output').append('>>> Command droped for dangerous operation\n');
+				return ;
+		}
+	}
 		try {
 			output += "\n" + JSON.stringify(db.exec(command), null, "  ");
 		} catch(err) {
@@ -305,7 +307,7 @@ function console_run(command) {
 		}
 	}
 	output += "\n";
-	$('#output').append('<<<  ' + command + '\n');
+
 	$('#output').append(output);
 	$('#output').scrollTop($('#output')[0].scrollHeight);
 
@@ -320,8 +322,8 @@ function switch_console(id) {
 	}).css({
 		"margin" : "0px",
 		"width" : "100%",
-		"height" : "300px"
-	}).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Michael Lee in 2016\n"));
+		"height" : "50vh"
+	}).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n"));
 	$('#' + id).append('<br/><br/>');
 	$('#' + id).append('Command input: <br/>');
 	$('#' + id).append($('<input></input>', {
