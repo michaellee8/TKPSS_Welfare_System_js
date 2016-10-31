@@ -423,7 +423,7 @@ function switch_report(id){
     }
     table_selection.appendTo('#' + id);
     $('#' + id).append('<br/>');
-    $('#' + id).append($('<button></button>',{text:'Export csv',id:'btn_csv',onclick:'run("export " + document.getElementById(table_selector).value)'}));
+    $('#' + id).append($('<button></button>',{text:'Export csv',id:'btn_csv',onclick:'run("export " + document.getElementById("table_selector").value)'}));
     $('#' + id).append($('<button></button>',{text:'Show in HTML table',id:'btn_table'}));
     $('#' + id).append('<div id="report_div"></div>');
     $('#btn_table').click(function() {$('#report_div').html("");$('#report_div').append('<br/><table id="report_table"></table><br/>');ConvertJsonToTable(db.tables[$(table_selector).val()], report_table, null, "");$('#report_table').DataTable();}); 
