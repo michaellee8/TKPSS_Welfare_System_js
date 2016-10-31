@@ -313,6 +313,63 @@ function console_run(command) {
 
 }
 
+function run(commmand){
+	if (command.toLowerCase() == 'localstorage clear') {
+		if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
+			localStorage.clear();
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'lssave') {
+		try {
+			lssave(command.split(' ')[1]);
+		} catch(err) {
+			console.log('Save to Local Storage Error: ' + err.message);
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'lsload') {
+		try {
+            lsload(command.split(' ')[1]);
+		} catch(err) {
+			console.log('Load from Local Storage Error: ' + err.message);
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'export') {
+		try {
+			var source_table = db.tables[command.split(' ')[1]].data;
+			download(Papa.unparse(source_table, {
+				dynamicTyping : true,
+				quotes : (function(table) {
+					var boolArray = [];
+					for (key in table[0]) {
+						boolArray.push(( typeof table[0][key]) == "string");
+					}
+					return boolArray;
+				})(source_table)
+			}), (command.split(' ')[2] != undefined ? command.split(' ')[2] : ('SUWDdb-' + command.split(' ')[1])) + '.csv', 'text/csv');
+			consloe.log('Export Data of table ' + command.split(' ')[1] + ' Success');
+		} catch(err) {
+			consloe.log('Export Data Error: ' + err.message);
+		}
+	} else if (command.split(' ')[0].toLowerCase() == 'import') {
+		consloe.log('import (not yet implemented)');
+	} else if (command.split(' ')[0].toLowerCase() == 'backup') {
+		consloe.log('backup (not yet implemented)');
+	} else if (command.split(' ')[0].toLowerCase() == 'restore') {
+		consloe.log('restore (not yet implemented)');
+	} else if (command.toLowerCase() == 'history') {
+		consloe.log("\n" + JSON.stringify(console_command_history, null, ' '));
+	} else {
+	  if ((['create','drop']).indexOf(command.split(' ')[0].toLowerCase()) != -1){
+	    if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
+    		command = "";
+				return ;
+		}
+	}
+		try {
+			db.exec(command);
+		} catch(err) {
+			consloe.log('SQL Error: ' + err.message);
+		}
+	}
+}
+
 function switch_console(id) {
 	save_erase(id, 1);
 	$('#' + id).append('Output: <br/>');
@@ -357,5 +414,17 @@ function switch_console(id) {
 }
 
 function switch_report(id){
-    
+    save_erase(id,3);
+    $('#' + id).append('<br/>');
+    $('#' + id).append('Choose the table that you want to output: \n');
+    var table_selection = $('<select></select>',{id:"table_selector"});
+    for (var i in db.tables){
+        table_selection.append($('<option></option>',{value:i,text:i}));
+    }
+    table_selection.appendTo('#' + id);
+    $('#' + id).append('<br/>');
+    $('#' + id).append($('<button></button>',{text:'Export csv',id:'btn_csv',onclick:'run('export ' + documenet.getElementById(table_selector).value)'}));
+    $('#' + id).append($('<button></button>',{text:'Show in HTML table',id:'btn_table'}));
+    $('#' + id).append('<div id="report_div"></div>');
+    $('#btn_table').click(function() {$('#report_div').html("");$('#report_div').append('<br/><table id="report_table"></table><br/>');ConvertJsonToTable(db.tables.[$(table_selector).val()], report_table, null, "");$('#report_table').DataTable();}); 
 }
