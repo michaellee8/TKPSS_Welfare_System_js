@@ -475,22 +475,24 @@ function switch_report(id) {
             dataset: {
                 records: db.tables[$('#table_selector').val()].data
             }
-        }); 
-    });  
+        });
+    });
 }
 
-function switch_edit(id){
-	save_erase(id, 1);
-	$('#' + id).append('<div id="div_edit"></div>');
-	function edit_option(o_name,val,fn){
-		this.name = o_name;
-		this.val = val;
-		this.fn = fn;
-	}
-	var myoptions = [];
-	myoptions.push(edit_option('Add Sell_Items','add_sell_items',function(){
-		$('#div_edit').html("");
-		$('#div_edit').append('<br/>Enter your new name of Sell_Items: <input type="text" id="edit_01"></input>');
-	}));
-	myoptions.push(edit_option('Edit Sell_Items','edit_sell_items'));
+function switch_edit(id) {
+    save_erase(id, 1);
+    $('#' + id).append('<div id="div_edit"></div>');
+
+    function edit_option(o_name, val, fn) {
+        this.name = o_name;
+        this.val = val;
+        this.fn = fn;
+    }
+    var myoptions = [];
+    myoptions.push(edit_option('Add Sell_Items', 'add_sell_items', function() {
+        var d = $('#div_edit');
+        d.html("");
+        d.append('<br/>Enter your new name of Sell_Items: <input type="text" id="edit_01"></input>');
+    }));
+    myoptions.push(edit_option('Edit Sell_Items', 'edit_sell_items'));
 }
