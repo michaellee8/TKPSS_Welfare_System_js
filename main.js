@@ -1,5 +1,14 @@
 /*eslint-env jquery, browser*/
-// var prev = ["","",""];
+
+/*
+ * Copyright 2016 Lee Chun Kok Michael
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ */
 
 var console_command_history = [];
 var console_command_history_currentIndex = -1;
@@ -429,7 +438,7 @@ function import_data(imported_json_string) {
 }
 
 function switch_report(id) {
-    save_erase(id, 3);
+    save_erase(id, 2);
     $('#' + id).append('<br/>');
     $('#' + id).append('Choose the table that you want to output: \n');
     var table_selection = $('<select></select>', {
@@ -466,10 +475,22 @@ function switch_report(id) {
             dataset: {
                 records: db.tables[$('#table_selector').val()].data
             }
-        });
-    });
+        }); 
+    });  
 }
 
-function switch_edit(){
-	save_erase(id, 3);
+function switch_edit(id){
+	save_erase(id, 1);
+	$('#' + id).append('<div id="div_edit"></div>');
+	function edit_option(o_name,val,fn){
+		this.name = o_name;
+		this.val = val;
+		this.fn = fn;
+	}
+	var myoptions = [];
+	myoptions.push(edit_option('Add Sell_Items','add_sell_items',function(){
+		$('#div_edit').html("");
+		$('#div_edit').append('<br/>Enter your new name of Sell_Items: <input type="text" id="edit_01"></input>');
+	}));
+	myoptions.push(edit_option('Edit Sell_Items','edit_sell_items'));
 }
