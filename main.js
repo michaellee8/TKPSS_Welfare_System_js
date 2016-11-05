@@ -32,18 +32,18 @@ function download(content, fileName, mimeType) {
     var a = document.createElement('a');
     mimeType = mimeType || 'application/octet-stream';
 
-    if (navigator.msSaveBlob) {// IE10
+    if (navigator.msSaveBlob) { // IE10
         return navigator.msSaveBlob(new Blob([content], {
-            type : mimeType
+            type: mimeType
         }), fileName);
-    } else if ('download' in a) {//html5 A[download]
+    } else if ('download' in a) { //html5 A[download]
         a.href = 'data:' + mimeType + ',' + encodeURIComponent(content);
         a.setAttribute('download', fileName);
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         return true;
-    } else {//do iframe dataURL download (old ch+FF):
+    } else { //do iframe dataURL download (old ch+FF):
         var f = document.createElement('iframe');
         document.body.appendChild(f);
         f.src = 'data:' + mimeType + ',' + encodeURIComponent(content);
@@ -53,7 +53,7 @@ function download(content, fileName, mimeType) {
         }, 333);
         return true;
     }
-};
+}
 
 if (!String.prototype.format) {
     String.prototype.format = function() {
@@ -63,7 +63,7 @@ if (!String.prototype.format) {
         var args = typeof arguments[0],
             args = (("string" == args || "number" == args) ? arguments : arguments[0]);
         for (arg in args)
-        str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
+            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
         return str;
     };
 }
@@ -85,55 +85,55 @@ function _init_() {
     lsload('Sell_Items');
     if (db.tables.Sell_Items.data.length == 0) {
         db.tables.Sell_Items.data = [{
-            name : 'pen01',
-            gid : 'p01',
-            number : 10,
-            price : 10
+            name: 'pen01',
+            gid: 'p01',
+            number: 10,
+            price: 10
         }, {
-            name : 'pen02',
-            gid : 'p02',
-            number : 20,
-            price : 20
+            name: 'pen02',
+            gid: 'p02',
+            number: 20,
+            price: 20
         }, {
-            name : 'pen03',
-            gid : 'p03',
-            number : 30,
-            price : 30
+            name: 'pen03',
+            gid: 'p03',
+            number: 30,
+            price: 30
         }, {
-            name : 'pen04',
-            gid : 'p04',
-            number : 40,
-            price : 40
+            name: 'pen04',
+            gid: 'p04',
+            number: 40,
+            price: 40
         }, {
-            name : 'pen05',
-            gid : 'p05',
-            number : 50,
-            price : 50
+            name: 'pen05',
+            gid: 'p05',
+            number: 50,
+            price: 50
         }, {
-            name : 'pen06',
-            gid : 'p06',
-            number : 60,
-            price : 60
+            name: 'pen06',
+            gid: 'p06',
+            number: 60,
+            price: 60
         }, {
-            name : 'pen07',
-            gid : 'p07',
-            number : 70,
-            price : 70
+            name: 'pen07',
+            gid: 'p07',
+            number: 70,
+            price: 70
         }, {
-            name : 'pen08',
-            gid : 'p08',
-            number : 80,
-            price : 80
+            name: 'pen08',
+            gid: 'p08',
+            number: 80,
+            price: 80
         }, {
-            name : 'pen09',
-            gid : 'p09',
-            number : 90,
-            price : 90
+            name: 'pen09',
+            gid: 'p09',
+            number: 90,
+            price: 90
         }, {
-            name : 'pen10',
-            gid : 'p10',
-            number : 100,
-            price : 100
+            name: 'pen10',
+            gid: 'p10',
+            number: 100,
+            price: 100
         }];
         lssave('Sell_Items');
     }
@@ -142,14 +142,14 @@ function _init_() {
     lsload('Student_Helpers');
     if (db.tables.Student_Helpers.data.length == 0) {
         db.tables.Student_Helpers.data = [{
-            name : 'student01',
-            hid : 'stu01'
+            name: 'student01',
+            hid: 'stu01'
         }, {
-            name : 'student02',
-            hid : 'stu02'
+            name: 'student02',
+            hid: 'stu02'
         }, {
-            name : 'others',
-            hid : 'stuo'
+            name: 'others',
+            hid: 'stuo'
         }];
         lssave('Student_Helpers');
     }
@@ -160,55 +160,55 @@ function _init_() {
     db.exec("CREATE TABLE IF NOT EXISTS Borrow_Items (name STRING, bid STRING, number integer, total integer)");
     if (db.tables.Borrow_Items.data.length == 0) {
         db.tables.Borrow_Items.data = [{
-            name : 'ball01',
-            bid : 'b01',
-            number : 10,
-            total : 10
+            name: 'ball01',
+            bid: 'b01',
+            number: 10,
+            total: 10
         }, {
-            name : 'ball02',
-            bid : 'b02',
-            number : 20,
-            total : 20
+            name: 'ball02',
+            bid: 'b02',
+            number: 20,
+            total: 20
         }, {
-            name : 'ball03',
-            bid : 'b03',
-            number : 30,
-            total : 30
+            name: 'ball03',
+            bid: 'b03',
+            number: 30,
+            total: 30
         }, {
-            name : 'ball04',
-            bid : 'b04',
-            number : 40,
-            total : 40
+            name: 'ball04',
+            bid: 'b04',
+            number: 40,
+            total: 40
         }, {
-            name : 'ball05',
-            bid : 'b05',
-            number : 50,
-            total : 50
+            name: 'ball05',
+            bid: 'b05',
+            number: 50,
+            total: 50
         }, {
-            name : 'ball06',
-            bid : 'b06',
-            number : 60,
-            total : 60
+            name: 'ball06',
+            bid: 'b06',
+            number: 60,
+            total: 60
         }, {
-            name : 'ball07',
-            bid : 'b07',
-            number : 70,
-            total : 70
+            name: 'ball07',
+            bid: 'b07',
+            number: 70,
+            total: 70
         }, {
-            name : 'ball08',
-            bid : 'b08',
-            number : 80,
-            total : 80
+            name: 'ball08',
+            bid: 'b08',
+            number: 80,
+            total: 80
         }, {
-            name : 'ball09',
-            bid : 'b09',
-            number : 90,
-            total : 90
+            name: 'ball09',
+            bid: 'b09',
+            number: 90,
+            total: 90
         }, {
-            name : 'ball10',
-            bid : 'b10',
-            number : 100,
-            total : 100
+            name: 'ball10',
+            bid: 'b10',
+            number: 100,
+            total: 100
         }];
         lssave('Borrow_Items');
     }
@@ -221,23 +221,30 @@ function _init_() {
 }
 
 function return_(sid, rhid, remarkr) {
-    var bid = db.exec('SELECT bid FROM Borrow_Records WHERE sid = "{sid}" AND returned = false'.format({
-        sid : sid
-    }));
-    if (!db.exec('SELECT * FROM Borrow_Records WHERE sid = "' + sid + '"')) {
+    sid = sid.toLowerCase();
+
+    if (!db.exec('SELECT * FROM Borrow_Records WHERE returned = false AND sid = "' + sid + '"')) {
         alert("We don't have your Borrow record");
     } else if (rhid == "nobody") {
         alert("Who is the handler?");
     } else {
-        if (confirm('Are you realy going to return a ' + db.exec('SELECT name FROM Borrow_Items WHERE bid=' + bid)[0].name + +' ?')) {
+        var bid = db.exec('SELECT bid FROM Borrow_Records WHERE sid = "{sid}" AND returned = false'.format({
+            sid: sid
+        }))[0].bid;
+        if (confirm('Are you realy going to return a ' + db.exec('SELECT name FROM Borrow_Items WHERE bid="' + bid + '"')[0].name + ' ?')) {
             lsload('Borrow_Items');
             lssave('Borrow_Records');
             var number_left = db.exec('SELECT number FROM Borrow_Items WHERE bid = "' + bid + '"')[0].number;
             db.exec('UPDATE Borrow_Items SET number = ' + (number_left + 1).toString() + ' WHERE bid = "' + bid + '"');
             lssave('Borrow_Items');
-            db.exec('UPDATE Borrow_Records SET returned = true, remarkr=' + remarkr + ', rhid=' + rhid + ', return_datetime=' + Date().toString() + 'WHERE sid=' + sid);
+            db.exec('UPDATE Borrow_Records SET returned = true, remarkr="{remarkr}", rhid="{rhid}", return_datetime="{return_datetime}" WHERE sid="{sid}" AND returned = false'.format({
+                remarkr: remarkr,
+                rhid: rhid,
+                return_datetime: Date().toString(),
+                sid: sid
+            }));
             lssave('Borrow_Records');
-            alert('Transaction success, a ' + db.exec('SELECT name FROM Borrow_Items WHERE bid=' + bid)[0].name + ' was returned ,' + db.exec('SELECT number FROM Borrow_Items WHERE bid = "' + bid + '"')[0].number.toString() + ' left');
+            alert('Transaction success, a ' + db.exec('SELECT name FROM Borrow_Items WHERE bid="' + bid + '"')[0].name + ' was returned ,' + db.exec('SELECT number FROM Borrow_Items WHERE bid = "' + bid + '"')[0].number.toString() + ' left');
             return true;
         } else {
             alert('Select item again then');
@@ -247,11 +254,12 @@ function return_(sid, rhid, remarkr) {
 }
 
 function borrow(bid, bhid, sid, remarkb, db) {
+    sid = sid.toLowerCase();
     if (bid === "nothing") {
         alert('Borrow Nothing!?');
     } else if (!/[1-6][a-d][0-3][0-9]/.test(sid)) {
         alert("Incorrect format of sid, it should be in form of e.g. 5c08");
-    } else if (db.exec("SELECT * FROM Borrow_Records WHERE sid = '" + sid + "'").length > 0) {
+    } else if (db.exec("SELECT * FROM Borrow_Records WHERE returned = false AND sid = '" + sid + "'").length > 0) {
         alert('You cannot borrow more than one items, pls return it first');
     } else if (bhid == "nobody") {
         alert("Who is the handler?");
@@ -267,15 +275,15 @@ function borrow(bid, bhid, sid, remarkb, db) {
                 db.exec('UPDATE Borrow_Items SET number = ' + (number_left - 1).toString() + ' WHERE bid = "' + bid + '"');
                 lssave('Borrow_Items');
                 db.tables.Borrow_Records.data.push({
-                    bid : bid,
-                    bhid : bhid,
-                    rhid : "Not returned",
-                    sid : sid,
-                    remarkb : remarkb,
-                    remarkr : "Not returned",
-                    borrow_datatime : Date().toString(),
-                    return_datetime : "Not returned",
-                    returned : false
+                    bid: bid,
+                    bhid: bhid,
+                    rhid: "Not returned",
+                    sid: sid,
+                    remarkb: remarkb,
+                    remarkr: "Not returned",
+                    borrow_datatime: Date().toString(),
+                    return_datetime: "Not returned",
+                    returned: false
                 });
                 lssave('Borrow_Records');
                 alert('Transaction success, a ' + db.exec('SELECT name FROM Borrow_Items WHERE bid="' + bid + '"')[0].name + ' was borrowed ,' + db.exec('SELECT number FROM Borrow_Items WHERE bid = "' + bid + '"')[0].number.toString() + ' left');
@@ -303,17 +311,17 @@ function sold(gid, number, hid, remark, db) {
         } else if (number <= 0) {
             alert('Are you kidding me? Buy more than 0 goods please');
         } else {
-            var really_buy = confirm('Are you realy going to buy ' + number + ' of ' + db.exec('SELECT name FROM Borrow_Items WHERE gid=' + gid)[0].name + ' with $' + (db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number).toString() + ' ?');
+            var really_buy = confirm('Are you realy going to buy ' + number + ' of ' + db.exec('SELECT name FROM Borrow_Items WHERE gid="' + gid + '"')[0].name + ' with $' + (db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number).toString() + ' ?');
             if (really_buy) {
                 db.exec('UPDATE Sell_Items SET number = ' + (number_left - number).toString() + ' WHERE gid = "' + gid + '"');
                 lssave('Sell_Items');
                 db.tables.Sell_Records.data.push({
-                    gid : gid,
-                    number : number,
-                    total_price : db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number,
-                    hid : hid,
-                    remark : remark,
-                    record_datetime : Date().toString()
+                    gid: gid,
+                    number: number,
+                    total_price: db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number,
+                    hid: hid,
+                    remark: remark,
+                    record_datetime: Date().toString()
                 });
                 lssave('Sell_Records');
                 alert('Transaction success, ' + number.toString() + ' of ' + db.exec('SELECT name FROM Borrow_Items WHERE gid=' + gid)[0].name + ' sold ,' + db.exec('SELECT number FROM Sell_Items WHERE gid = "' + gid + '"')[0].number.toString() + ' left');
@@ -336,22 +344,22 @@ function switch_sell(id) {
     save_erase(id, 3);
 
     var form = $('<form></form>', {
-        id : "sell_item_selection_form"
+        id: "sell_item_selection_form"
     });
     $(form).append('What do you want to buy? ');
     var sell_select_item = $('<select></select>', {
-        id : "sell_item_selector"
+        id: "sell_item_selector"
     });
     $(sell_select_item).append($('<option></option>', {
-        id : 'sell_item_selector_option_' + 'nothing',
-        value : 'nothing',
-        text : 'Nothing'
+        id: 'sell_item_selector_option_' + 'nothing',
+        value: 'nothing',
+        text: 'Nothing'
     }));
     for (i in db.tables.Sell_Items.data) {
         $(sell_select_item).append($('<option></option>', {
-            id : 'sell_item_selector_option_' + db.tables.Sell_Items.data[i].gid,
-            value : db.tables.Sell_Items.data[i].gid,
-            text : getListText(db.tables.Sell_Items.data[i].gid, db.tables.Sell_Items.data[i].name, db.tables.Sell_Items.data[i].price, db.tables.Sell_Items.data[i].number)
+            id: 'sell_item_selector_option_' + db.tables.Sell_Items.data[i].gid,
+            value: db.tables.Sell_Items.data[i].gid,
+            text: getListText(db.tables.Sell_Items.data[i].gid, db.tables.Sell_Items.data[i].name, db.tables.Sell_Items.data[i].price, db.tables.Sell_Items.data[i].number)
         }));
     }
     $(form).append(sell_select_item);
@@ -360,37 +368,38 @@ function switch_sell(id) {
     $(form).append('<br/><br/>');
     $(form).append('Who are you? ');
     var student_helper_select = $('<select></select>', {
-        id : "student_helper_selector"
+        id: "student_helper_selector"
     });
     $(student_helper_select).append($('<option></option>', {
-        id : 'stduent_helper_selector_option_' + 'nothing',
-        value : 'nobody',
-        text : 'Nobody nobody ♫'
+        id: 'stduent_helper_selector_option_' + 'nothing',
+        value: 'nobody',
+        text: 'Nobody nobody ♫'
     }));
     for (i in db.tables.Student_Helpers.data) {
         $(student_helper_select).append($('<option></option>', {
-            id : 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
-            value : db.tables.Student_Helpers.data[i].hid,
-            text : db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
+            id: 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
+            value: db.tables.Student_Helpers.data[i].hid,
+            text: db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
         }));
     }
     $(form).append(student_helper_select);
     $(form).append('<br/><br/>Any remarks?  ');
     $(form).append($('<input/>', {
-        id : 'remark_text',
-        value : "",
-        type : "text"
+        id: 'remark_text',
+        value: "",
+        type: "text"
     }));
     $(form).append('<br/><br/>');
     $(form).append($('<button></button>', {
-        id : "sell_confirm",
-        text : "confirm",
-        type : "button"
+        id: "sell_confirm",
+        text: "confirm",
+        type: "button"
     }));
     $('#' + id).append(form);
     $('#sell_confirm').click(function() {
-        if (sold($('#sell_item_selector').val(), $('#sell_number').val(), $('#student_helper_selector').val(), $('#remark_text').val(), db))
+        if (sold($('#sell_item_selector').val(), $('#sell_number').val(), $('#student_helper_selector').val(), $('#remark_text').val(), db)) {
             switch_sell(window.SUWD_div_id);
+        }
     });
 }
 
@@ -427,11 +436,11 @@ function console_run(command) {
         try {
             var source_table = db.tables[command.split(' ')[1]].data;
             download(Papa.unparse(source_table, {
-                dynamicTyping : true,
-                quotes : (function(table) {
+                dynamicTyping: true,
+                quotes: (function(table) {
                     var boolArray = [];
                     for (key in table[0]) {
-                        boolArray.push( typeof table[0][key] == "string");
+                        boolArray.push(typeof table[0][key] == "string");
                     }
                     return boolArray;
                 })(source_table)
@@ -491,11 +500,11 @@ function run(command) {
         try {
             var source_table = db.tables[command.split(' ')[1]].data;
             download(Papa.unparse(source_table, {
-                dynamicTyping : true,
-                quotes : (function(table) {
+                dynamicTyping: true,
+                quotes: (function(table) {
                     var boolArray = [];
                     for (key in table[0]) {
-                        boolArray.push( typeof table[0][key] == "string");
+                        boolArray.push(typeof table[0][key] == "string");
                     }
                     return boolArray;
                 })(source_table)
@@ -531,22 +540,22 @@ function switch_console(id) {
     save_erase(id, 1);
     $('#' + id).append('Output: <br/>');
     $('#' + id).append($('<textarea></textarea>', {
-        id : "output",
-        readonly : "readonly"
+        id: "output",
+        readonly: "readonly"
     }).css({
-        "margin" : "0px",
-        "width" : "100%",
-        "height" : "50vh"
+        "margin": "0px",
+        "width": "100%",
+        "height": "50vh"
     }).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n"));
     $('#' + id).append('<br/><br/>');
     $('#' + id).append('Command input: <br/>');
     $('#' + id).append($('<input></input>', {
-        id : "input",
-        type : "text"
+        id: "input",
+        type: "text"
     }).css({
-        "margin" : "0px",
-        "width" : "100%",
-        "font-family" : "monospace"
+        "margin": "0px",
+        "width": "100%",
+        "font-family": "monospace"
     }).keyup(function(e) {
         if (e.keyCode === 13) {
             var command = $('#input').val();
@@ -554,14 +563,14 @@ function switch_console(id) {
             console_run(command);
         }
     }).keydown(function(e) {
-        if (e.keyCode == 38) {// pressing upArrow
+        if (e.keyCode == 38) { // pressing upArrow
             console_command_history_currentIndex = console_command_history_currentIndex > 0 ? console_command_history_currentIndex - 1 : 0;
-            if ( typeof console_command_history[console_command_history_currentIndex] == 'string') {
+            if (typeof console_command_history[console_command_history_currentIndex] == 'string') {
                 $('#input').val(console_command_history[console_command_history_currentIndex]);
             }
-        } else if (e.keyCode == 40) {// pressing downArrow
+        } else if (e.keyCode == 40) { // pressing downArrow
             console_command_history_currentIndex = console_command_history_currentIndex + 1 < console_command_history.length ? console_command_history_currentIndex + 1 : console_command_history.length - 1;
-            if ( typeof console_command_history[console_command_history_currentIndex] == 'string') {
+            if (typeof console_command_history[console_command_history_currentIndex] == 'string') {
                 $('#input').val(console_command_history[console_command_history_currentIndex]);
             }
         }
@@ -589,24 +598,24 @@ function switch_report(id) {
     $('#' + id).append('<br/>');
     $('#' + id).append('Choose the table that you want to output: \n');
     var table_selection = $('<select></select>', {
-        id : "table_selector"
+        id: "table_selector"
     });
     for (var i in db.tables) {
         table_selection.append($('<option></option>', {
-            value : i,
-            text : i
+            value: i,
+            text: i
         }));
     }
     table_selection.appendTo('#' + id);
     $('#' + id).append('<br/>');
     $('#' + id).append($('<button></button>', {
-        text : 'Export csv',
-        id : 'btn_csv',
-        onclick : 'run("export " + document.getElementById("table_selector").value)'
+        text: 'Export csv',
+        id: 'btn_csv',
+        onclick: 'run("export " + document.getElementById("table_selector").value)'
     }));
     $('#' + id).append($('<button></button>', {
-        text : 'Show in HTML table',
-        id : 'btn_table'
+        text: 'Show in HTML table',
+        id: 'btn_table'
     }));
     $('#' + id).append('<div id="report_div"></div>');
     $('#btn_table').click(function() {
@@ -615,12 +624,12 @@ function switch_report(id) {
         $('#report_div').append('<br/><table id="report_table"><thead><tr id="report_table_head"></tr></thead><tbody></tbody></table><br/>');
         for (i in db.tables[$('#table_selector').val()].data[0]) {
             $('#report_table_head').append($('<th></th>', {
-                text : i
+                text: i
             }));
         }
         $('#report_table').dynatable({
-            dataset : {
-                records : db.tables[$('#table_selector').val()].data
+            dataset: {
+                records: db.tables[$('#table_selector').val()].data
             }
         });
     });
@@ -649,6 +658,7 @@ function switch_edit(id) {
 }
 
 function switch_borrow(id) {
+    window.SUWD_div_id = id;
 
     function getListText(gid, name, number) {
         return gid + '    ' + name + '    Number left: ' + number;
@@ -657,22 +667,22 @@ function switch_borrow(id) {
     save_erase(id, 4);
 
     var form = $('<form></form>', {
-        id : "borrow_item_selection_form"
+        id: "borrow_item_selection_form"
     });
     $(form).append('What do you want to borrow? ');
     var borrow_select_item = $('<select></select>', {
-        id : "borrow_item_selector"
+        id: "borrow_item_selector"
     });
     $(borrow_select_item).append($('<option></option>', {
-        id : 'borrow_item_selector_option_' + 'nothing',
-        value : 'nothing',
-        text : 'Nothing'
+        id: 'borrow_item_selector_option_' + 'nothing',
+        value: 'nothing',
+        text: 'Nothing'
     }));
     for (i in db.tables.Borrow_Items.data) {
         $(borrow_select_item).append($('<option></option>', {
-            id : 'borrow_item_selector_option_' + db.tables.Borrow_Items.data[i].bid,
-            value : db.tables.Borrow_Items.data[i].bid,
-            text : getListText(db.tables.Borrow_Items.data[i].bid, db.tables.Borrow_Items.data[i].name, db.tables.Borrow_Items.data[i].number)
+            id: 'borrow_item_selector_option_' + db.tables.Borrow_Items.data[i].bid,
+            value: db.tables.Borrow_Items.data[i].bid,
+            text: getListText(db.tables.Borrow_Items.data[i].bid, db.tables.Borrow_Items.data[i].name, db.tables.Borrow_Items.data[i].number)
         }));
     }
     $(form).append(borrow_select_item);
@@ -680,108 +690,112 @@ function switch_borrow(id) {
     $(form).append('<input id="student_id"/>');
     $(form).append('<br/><br/>Who are you?');
     var student_helper_select = $('<select></select>', {
-        id : "student_helper_selector"
+        id: "student_helper_selector"
     });
     $(student_helper_select).append($('<option></option>', {
-        id : 'stduent_helper_selector_option_' + 'nothing',
-        value : 'nobody',
-        text : 'Nobody nobody ♫'
+        id: 'stduent_helper_selector_option_' + 'nothing',
+        value: 'nobody',
+        text: 'Nobody nobody ♫'
     }));
     for (i in db.tables.Student_Helpers.data) {
         $(student_helper_select).append($('<option></option>', {
-            id : 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
-            value : db.tables.Student_Helpers.data[i].hid,
-            text : db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
+            id: 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
+            value: db.tables.Student_Helpers.data[i].hid,
+            text: db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
         }));
     }
     $(form).append(student_helper_select);
     $(form).append('<br/><br/>Any remarks?  ');
     $(form).append($('<input/>', {
-        id : 'remark_text',
-        value : "",
-        type : "text"
+        id: 'remark_text',
+        value: "",
+        type: "text"
     }));
     $(form).append('<br/><br/>');
     $(form).append($('<button></button>', {
-        id : "borrow_confirm",
-        text : "confirm",
-        type : "button"
+        id: "borrow_confirm",
+        text: "confirm",
+        type: "button"
     }));
     $('#' + id).append(form);
     $('#borrow_confirm').click(function() {
-        if (borrow($('#borrow_item_selector').val(), $('#student_helper_selector').val(), $('#student_id').val(), $('#remark_text').val(), db))
-            switch_sell(window.SUWD_div_id);
+        if (borrow($('#borrow_item_selector').val(), $('#student_helper_selector').val(), $('#student_id').val(), $('#remark_text').val(), db)) {
+            switch_borrow(window.SUWD_div_id);
+        }
 
     });
 }
 
 function switch_return(id) {
+    window.SUWD_div_id = id;
+
     function getListText(bid, sid) {
         return "{bid}    {name}    {sid}".format({
-            bid : bid,
-            name : db.exec("SELECT name FROM Borrow_Items WHERE bid = '{bid}'".format({
-                bid : bid
-            })),
-            sid : sid
+            bid: bid,
+            name: db.exec("SELECT name FROM Borrow_Items WHERE bid = '{bid}'".format({
+                bid: bid
+            }))[0].name,
+            sid: sid
         });
     }
 
     save_erase(id, 5);
 
     var form = $('<form></form>', {
-        id : "return_item_selection_form"
+        id: "return_item_selection_form"
     });
     $(form).append('Which entry do you want to return? ');
     var return_select_item = $('<select></select>', {
-        id : "return_item_selector"
+        id: "return_item_selector"
     });
     $(return_select_item).append($('<option></option>', {
-        id : 'return_item_selector_option_' + 'nothing',
-        value : 'nothing',
-        text : 'Nothing'
+        id: 'return_item_selector_option_' + 'nothing',
+        value: 'nothing',
+        text: 'Nothing'
     }));
     var borrow_data = db.exec("SELECT bid,sid FROM Borrow_Records WHERE returned = false");
     for (i in borrow_data) {
         $(return_select_item).append($('<option></option>', {
-            id : 'return_item_selector_option_' + borrow_data[i].bid,
-            value : borrow_data[i].sid,
-            text : getListText(borrow_data[i].bid, borrow_data[i].sid)
+            id: 'return_item_selector_option_' + borrow_data[i].bid,
+            value: borrow_data[i].sid,
+            text: getListText(borrow_data[i].bid, borrow_data[i].sid)
         }));
     }
     $(form).append(return_select_item);
     $(form).append('<br/><br/>Who are you?');
     var student_helper_select = $('<select></select>', {
-        id : "student_helper_selector"
+        id: "student_helper_selector"
     });
     $(student_helper_select).append($('<option></option>', {
-        id : 'stduent_helper_selector_option_' + 'nothing',
-        value : 'nobody',
-        text : 'Nobody nobody ♫'
+        id: 'stduent_helper_selector_option_' + 'nothing',
+        value: 'nobody',
+        text: 'Nobody nobody ♫'
     }));
     for (i in db.tables.Student_Helpers.data) {
         $(student_helper_select).append($('<option></option>', {
-            id : 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
-            value : db.tables.Student_Helpers.data[i].hid,
-            text : db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
+            id: 'student_helper_selector_option_' + db.tables.Student_Helpers.data[i].hid,
+            value: db.tables.Student_Helpers.data[i].hid,
+            text: db.tables.Student_Helpers.data[i].hid + ' ' + db.tables.Student_Helpers.data[i].name
         }));
     }
     $(form).append(student_helper_select);
     $(form).append('<br/><br/>Any remarks?  ');
     $(form).append($('<input/>', {
-        id : 'remark_text',
-        value : "",
-        type : "text"
+        id: 'remark_text',
+        value: "",
+        type: "text"
     }));
     $(form).append('<br/><br/>');
     $(form).append($('<button></button>', {
-        id : "borrow_confirm",
-        text : "confirm",
-        type : "button"
+        id: "borrow_confirm",
+        text: "confirm",
+        type: "button"
     }));
     $('#' + id).append(form);
     $('#borrow_confirm').click(function() {
-        if (return_($('#return_item_selector').val(), $('#stuent_helper_selector').val(), $('#remark_text').val()))
-            switch_sell(window.SUWD_div_id);
+        if (return_($('#return_item_selector').val(), $('#student_helper_selector').val(), $('#remark_text').val())) {
+            switch_return(window.SUWD_div_id);
+        }
 
     });
 }
