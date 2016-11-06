@@ -450,12 +450,32 @@ function console_run(command) {
             output += 'Export Data Error: ' + err.message;
         }
     } else if (command.split(' ')[0].toLowerCase() == 'import') {
-        output += 'import (not yet implemented)';
+        output += 'import (deprecated)';
+
     } else if (command.split(' ')[0].toLowerCase() == 'backup') {
         export_data();
         output += 'backup data downloaded';
     } else if (command.split(' ')[0].toLowerCase() == 'restore') {
-        output += 'restore (not yet implemented)';
+        if (!document.getElementById('fileselector')) {
+            $('body').append($('<input></input>', {
+                type: "file",
+                id: "fileselector",
+                accept: 'text/plain'
+            }));
+        }
+        $('#fileselector').css("display", "none");
+        $('#fileselector').click();
+        $('#fileselector').change(function(e) {
+            var input = e.target;
+            var reader = new FileReader();
+            reader.onload = function() {
+                var text = reader.result;
+                alert(text);
+                import_data(text);
+                $('#output').append('>>> Data Imported\n');
+            };
+            reader.readAsText(input.files[0]);
+        });
     } else if (command.toLowerCase() == 'history') {
         output += "\n" + JSON.stringify(console_command_history, null, ' ');
     } else {
@@ -509,18 +529,37 @@ function run(command) {
                     return boolArray;
                 })(source_table)
             }), (command.split(' ')[2] != undefined ? command.split(' ')[2] : 'SUWDdb-' + command.split(' ')[1]) + '.csv', 'text/csv');
-            consloe.log('Export Data of table ' + command.split(' ')[1] + ' Success');
+            console.log('Export Data of table ' + command.split(' ')[1] + ' Success');
         } catch (err) {
-            consloe.log('Export Data Error: ' + err.message);
+            console.log('Export Data Error: ' + err.message);
         }
     } else if (command.split(' ')[0].toLowerCase() == 'import') {
-        consloe.log('import (not yet implemented)');
+        console.log('import (deprecated)');
     } else if (command.split(' ')[0].toLowerCase() == 'backup') {
-        consloe.log('backup (not yet implemented)');
+        export_data();
+        console.log('backup data downloaded');
     } else if (command.split(' ')[0].toLowerCase() == 'restore') {
-        consloe.log('restore (not yet implemented)');
+
+        if (!document.getElementById('fileselector')) {
+            $('body').append($('<input></input>', {
+                type: "file",
+                id: "fileselector",
+                accept: 'text/plain'
+            }));
+        }
+        $('#fileselector').css("display", "none");
+        $('#fileselector').click();
+        $('#fileselector').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var text = reader.result;
+                import_data(text);
+                console.log('Data Imported');
+            };
+            reader.readAsText(document.getElementById('fileselector').files[0]);
+        });
     } else if (command.toLowerCase() == 'history') {
-        consloe.log("\n" + JSON.stringify(console_command_history, null, ' '));
+        console.log("\n" + JSON.stringify(console_command_history, null, ' '));
     } else {
         if (['create', 'drop'].indexOf(command.split(' ')[0].toLowerCase()) != -1) {
             if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
@@ -531,7 +570,7 @@ function run(command) {
         try {
             db.exec(command);
         } catch (err) {
-            consloe.log('SQL Error: ' + err.message);
+            console.log('SQL Error: ' + err.message);
         }
     }
 }
@@ -589,7 +628,7 @@ function export_data() {
 function import_data(imported_json_string) {
     var obj = JSON.parse(imported_json_string);
     for (i in obj) {
-        localStorage.setItem(i, obj[i]);
+        localStorage.setItem(i, obj[i].toString());
     }
 }
 
