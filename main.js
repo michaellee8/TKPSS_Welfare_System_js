@@ -476,6 +476,9 @@ function console_run(command) {
             };
             reader.readAsText(input.files[0]);
         });
+        for (i in db.tables){
+        	lsload(i);
+        }
     } else if (command.toLowerCase() == 'history') {
         output += "\n" + JSON.stringify(console_command_history, null, ' ');
     } else {
@@ -558,6 +561,9 @@ function run(command) {
             };
             reader.readAsText(document.getElementById('fileselector').files[0]);
         });
+        for (i in db.tables){
+        	lsload(i);
+        }
     } else if (command.toLowerCase() == 'history') {
         console.log("\n" + JSON.stringify(console_command_history, null, ' '));
     } else {
