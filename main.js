@@ -217,14 +217,41 @@ function _init_() {
     lsload('Student_Helpers');
     if (db.tables.Student_Helpers.data.length == 0) {
         db.tables.Student_Helpers.data = [{
-            name: 'student01',
-            hid: 'stu01'
+            name: 'member 1',
+            hid: 'm01'
         }, {
-            name: 'student02',
-            hid: 'stu02'
+            name: 'member 2',
+            hid: 'm02'
         }, {
-            name: 'others',
-            hid: 'stuo'
+            name: 'helper 11',
+            hid: 'h11'
+        }, {
+            name: 'helper 12',
+            hid: 'h12'
+        }, {
+            name: 'helper 21',
+            hid: 'h21'
+        }, {
+            name: 'helper 22',
+            hid: 'h22'
+        }, {
+            name: 'helper 31',
+            hid: 'h31'
+        }, {
+            name: 'helper 32',
+            hid: 'h32'
+        }, {
+            name: 'helper 41',
+            hid: 'h41'
+        }, {
+            name: 'helper 42',
+            hid: 'h42'
+        }, {
+            name: 'helper 51',
+            hid: 'h51'
+        }, {
+            name: 'helper 52',
+            hid: 'h52'
         }];
         lssave('Student_Helpers');
     }
@@ -491,10 +518,10 @@ function console_run(command) {
     var output = ">>>  ";
     if (command.toLowerCase() == 'clear') {
         $('#output').html("");
-        $('#output').append('Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n');
+        $('#output').append('Tin Ka Ping Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n');
         output += 'Console cleared';
     } else if (command.toLowerCase() == 'localstorage clear') {
-        if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process that could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
+        if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINGSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process that could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
             localStorage.clear();
             output += 'localStorage cleared!!! Well, you have just destoryed everything';
         } else {
@@ -563,7 +590,7 @@ function console_run(command) {
         output += "\n" + JSON.stringify(console_command_history, null, ' ');
     } else {
         if (['create', 'drop', 'delete'].indexOf(command.split(' ')[0].toLowerCase()) != -1) {
-            if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process that could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
+            if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINGSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process that could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
                 command = "";
                 $('#output').append('>>> Command droped for dangerous operation\n');
                 return;
@@ -584,7 +611,7 @@ function console_run(command) {
 
 function run(command) {
     if (command.toLowerCase() == 'localstorage clear') {
-        if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
+        if (confirm("Are you really going to clear all database data stored in this system?\nThis action is dangerous and cannot be inversed.") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINGSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f') {
             localStorage.clear();
         }
     } else if (command.split(' ')[0].toLowerCase() == 'lssave') {
@@ -648,7 +675,7 @@ function run(command) {
         console.log("\n" + JSON.stringify(console_command_history, null, ' '));
     } else {
         if (['create', 'drop'].indexOf(command.split(' ')[0].toLowerCase()) != -1) {
-            if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
+            if (!(confirm("You are doing a dangerous SQL operation, confirm?") && prompt('Type in the full name of this school with all capital letters and no space') == 'TINKAPINGSECONDARYSCHOOL' && CryptoJS.SHA256(prompt('Give me the admin password, note that this is the last chance to stop this inreversible process thaat could break everything in the database')).toString() == '9806e133d2a4aef6d63a7db583976144399618849f95de2317545e04e869241f')) {
                 command = "";
                 return;
             }
@@ -671,7 +698,7 @@ function switch_console(id) {
         "margin": "0px",
         "width": "100%",
         "height": "50vh"
-    }).html("Tin Ka Pin Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n"));
+    }).html("Tin Ka Ping Secondary School Student Union Welfare Department Managemant System Console written by Lee Chun Kok Michael in 2016\n"));
     $('#' + id).append('<br/><br/>');
     $('#' + id).append('Command input: <br/>');
     $('#' + id).append($('<input></input>', {
