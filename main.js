@@ -74,7 +74,7 @@ function lssave(name) {
 }
 
 function lsload(name) {
-    db.tables[name].data = localStorage.getItem('SUWDdb.' + name) != null && localStorage.getItem('SUWDdb.' + name) != "" ? JSON.parse(localStorage.getItem('SUWDdb.' + name)) : [];
+    db.tables[name].data = localStorage.getItem('SUWDdb.' + name) ? JSON.parse(localStorage.getItem('SUWDdb.' + name)) : [];
     return JSON.parse(localStorage.getItem('SUWDdb.' + name));
 }
 
