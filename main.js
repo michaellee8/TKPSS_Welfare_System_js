@@ -78,247 +78,246 @@ function lsload(name) {
     return JSON.parse(localStorage.getItem('SUWDdb.' + name));
 }
 
+function reset_all_data() {
+    db.tables.Sell_Items.data = [{
+        "name": "通識答題紙",
+        "gid": "b01",
+        "number": 5,
+        "price": 9.6
+    }, {
+        "name": "藍單行簿",
+        "gid": "b02",
+        "number": 32,
+        "price": 1
+    }, {
+        "name": "中文作文封面",
+        "gid": "b03",
+        "number": 10,
+        "price": 5.5
+    }, {
+        "name": "灰色File",
+        "gid": "b04",
+        "number": 9,
+        "price": 2.2
+    }, {
+        "name": "紅色File",
+        "gid": "b05",
+        "number": 10,
+        "price": 2.2
+    }, {
+        "name": "橙色File",
+        "gid": "b06",
+        "number": 3,
+        "price": 2.2
+    }, {
+        "name": "黃色File",
+        "gid": "b07",
+        "number": 6,
+        "price": 2.2
+    }, {
+        "name": "白襪",
+        "gid": "b08",
+        "number": 14,
+        "price": 5
+    }, {
+        "name": "灰襪",
+        "gid": "b09",
+        "number": 25,
+        "price": 5
+    }, {
+        "name": "暖包",
+        "gid": "b10",
+        "number": 69,
+        "price": 2
+    }, {
+        "name": "綠色螢光筆",
+        "gid": "b11",
+        "number": 10,
+        "price": 4.5
+    }, {
+        "name": "橙色螢光筆",
+        "gid": "b12",
+        "number": 10,
+        "price": 4.5
+    }, {
+        "name": "藍色螢光筆",
+        "gid": "b13",
+        "number": 10,
+        "price": 4.5
+    }, {
+        "name": "黃色螢光筆",
+        "gid": "b14",
+        "number": 6,
+        "price": 4.5
+    }, {
+        "name": "紫色螢光筆",
+        "gid": "b15",
+        "number": 10,
+        "price": 4.5
+    }, {
+        "name": "紅色螢光筆",
+        "gid": "b16",
+        "number": 10,
+        "price": 4.5
+    }, {
+        "name": "藍筆",
+        "gid": "b17",
+        "number": 14,
+        "price": 4.5
+    }, {
+        "name": "黑筆",
+        "gid": "b18",
+        "number": 17,
+        "price": 4.5
+    }, {
+        "name": "sarasa黑色芯",
+        "gid": "b19",
+        "number": 5,
+        "price": 4
+    }, {
+        "name": "sarasa藍色芯",
+        "gid": "b20",
+        "number": 20,
+        "price": 4
+    }, {
+        "name": "uni?喱黑色筆",
+        "gid": "b21",
+        "number": 5,
+        "price": 7
+    }, {
+        "name": "uni?喱藍色筆",
+        "gid": "b22",
+        "number": 10,
+        "price": 7
+    }, {
+        "name": "塗改液",
+        "gid": "b23",
+        "number": 10,
+        "price": 16
+    }, {
+        "name": "白筆袋",
+        "gid": "b24",
+        "number": 1,
+        "price": 5
+    }, {
+        "name": "義工紀錄冊",
+        "gid": "b25",
+        "number": 3,
+        "price": 5
+    }];
+
+    db.tables.Student_Helpers.data = [{
+        name: 'member 1',
+        hid: 'm01'
+    }, {
+        name: 'member 2',
+        hid: 'm02'
+    }, {
+        name: 'helper 11',
+        hid: 'h11'
+    }, {
+        name: 'helper 12',
+        hid: 'h12'
+    }, {
+        name: 'helper 21',
+        hid: 'h21'
+    }, {
+        name: 'helper 22',
+        hid: 'h22'
+    }, {
+        name: 'helper 31',
+        hid: 'h31'
+    }, {
+        name: 'helper 32',
+        hid: 'h32'
+    }, {
+        name: 'helper 41',
+        hid: 'h41'
+    }, {
+        name: 'helper 42',
+        hid: 'h42'
+    }, {
+        name: 'helper 51',
+        hid: 'h51'
+    }, {
+        name: 'helper 52',
+        hid: 'h52'
+    }];
+
+    db.tables.Borrow_Items.data = [{
+        "name": "康樂棋",
+        "bid": "a1",
+        "number": 7,
+        "total": 7
+    }, {
+        "name": "波子棋",
+        "bid": "a2",
+        "number": 4,
+        "total": 4
+    }, {
+        "name": "鬥獸棋",
+        "bid": "a3",
+        "number": 2,
+        "total": 2
+    }, {
+        "name": "飛行棋",
+        "bid": "a4",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "象棋",
+        "bid": "a5",
+        "number": 5,
+        "total": 5
+    }, {
+        "name": "UNO",
+        "bid": "a6",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "Deal",
+        "bid": "a7",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "Pictionary",
+        "bid": "a8",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "狼人",
+        "bid": "a9",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "妙探尋兇",
+        "bid": "a10",
+        "number": 1,
+        "total": 1
+    }, {
+        "name": "雨傘",
+        "bid": "a11",
+        "number": 4,
+        "total": 4
+    }];
+
+
+}
+
 function _init_() {
     // Below code is for debug test, will be corrected later when edit function is developed
     db.exec("CREATE TABLE IF NOT EXISTS Sell_Items (name STRING, gid STRING, number integer, price FLOAT)");
 
     lsload('Sell_Items');
-    if (db.tables.Sell_Items.data.length == 0) {
-        db.tables.Sell_Items.data = [{
-            "name": "通識答題紙",
-            "gid": "b01",
-            "number": 5,
-            "price": 9.6
-        }, {
-            "name": "藍單行簿",
-            "gid": "b02",
-            "number": 32,
-            "price": 1
-        }, {
-            "name": "中文作文封面",
-            "gid": "b03",
-            "number": 10,
-            "price": 5.5
-        }, {
-            "name": "灰色File",
-            "gid": "b04",
-            "number": 9,
-            "price": 2.2
-        }, {
-            "name": "紅色File",
-            "gid": "b05",
-            "number": 10,
-            "price": 2.2
-        }, {
-            "name": "橙色File",
-            "gid": "b06",
-            "number": 3,
-            "price": 2.2
-        }, {
-            "name": "黃色File",
-            "gid": "b07",
-            "number": 6,
-            "price": 2.2
-        }, {
-            "name": "白襪",
-            "gid": "b08",
-            "number": 14,
-            "price": 5
-        }, {
-            "name": "灰襪",
-            "gid": "b09",
-            "number": 25,
-            "price": 5
-        }, {
-            "name": "暖包",
-            "gid": "b10",
-            "number": 69,
-            "price": 2
-        }, {
-            "name": "綠色螢光筆",
-            "gid": "b11",
-            "number": 10,
-            "price": 4.5
-        }, {
-            "name": "橙色螢光筆",
-            "gid": "b12",
-            "number": 10,
-            "price": 4.5
-        }, {
-            "name": "藍色螢光筆",
-            "gid": "b13",
-            "number": 10,
-            "price": 4.5
-        }, {
-            "name": "黃色螢光筆",
-            "gid": "b14",
-            "number": 6,
-            "price": 4.5
-        }, {
-            "name": "紫色螢光筆",
-            "gid": "b15",
-            "number": 10,
-            "price": 4.5
-        }, {
-            "name": "紅色螢光筆",
-            "gid": "b16",
-            "number": 10,
-            "price": 4.5
-        }, {
-            "name": "藍筆",
-            "gid": "b17",
-            "number": 14,
-            "price": 4.5
-        }, {
-            "name": "黑筆",
-            "gid": "b18",
-            "number": 17,
-            "price": 4.5
-        }, {
-            "name": "sarasa黑色芯",
-            "gid": "b19",
-            "number": 5,
-            "price": 4
-        }, {
-            "name": "sarasa藍色芯",
-            "gid": "b20",
-            "number": 20,
-            "price": 4
-        }, {
-            "name": "uni?喱黑色筆",
-            "gid": "b21",
-            "number": 5,
-            "price": 7
-        }, {
-            "name": "uni?喱藍色筆",
-            "gid": "b22",
-            "number": 10,
-            "price": 7
-        }, {
-            "name": "塗改液",
-            "gid": "b23",
-            "number": 10,
-            "price": 16
-        }, {
-            "name": "白筆袋",
-            "gid": "b24",
-            "number": 1,
-            "price": 5
-        }, {
-            "name": "義工紀錄冊",
-            "gid": "b25",
-            "number": 3,
-            "price": 5
-        }];
-        lssave('Sell_Items');
-    }
-    db.exec("CREATE TABLE IF NOT EXISTS Student_Helpers (name STRING, hid STRING)");
 
+    db.exec("CREATE TABLE IF NOT EXISTS Student_Helpers (name STRING, hid STRING)");
     lsload('Student_Helpers');
-    if (db.tables.Student_Helpers.data.length == 0) {
-        db.tables.Student_Helpers.data = [{
-            name: 'member 1',
-            hid: 'm01'
-        }, {
-            name: 'member 2',
-            hid: 'm02'
-        }, {
-            name: 'helper 11',
-            hid: 'h11'
-        }, {
-            name: 'helper 12',
-            hid: 'h12'
-        }, {
-            name: 'helper 21',
-            hid: 'h21'
-        }, {
-            name: 'helper 22',
-            hid: 'h22'
-        }, {
-            name: 'helper 31',
-            hid: 'h31'
-        }, {
-            name: 'helper 32',
-            hid: 'h32'
-        }, {
-            name: 'helper 41',
-            hid: 'h41'
-        }, {
-            name: 'helper 42',
-            hid: 'h42'
-        }, {
-            name: 'helper 51',
-            hid: 'h51'
-        }, {
-            name: 'helper 52',
-            hid: 'h52'
-        }];
-        lssave('Student_Helpers');
-    }
+
 
     db.exec("CREATE TABLE IF NOT EXISTS Sell_Records (gid STRING, number integer, total_price FLOAT, hid STRING, remark STRING, record_datetime STRING)");
     lsload('Sell_Records');
 
     db.exec("CREATE TABLE IF NOT EXISTS Borrow_Items (name STRING, bid STRING, number integer, total integer)");
-    if (db.tables.Borrow_Items.data.length == 0) {
-        db.tables.Borrow_Items.data = [{
-            "name": "康樂棋",
-            "bid": "a1",
-            "number": 7,
-            "total": 7
-        }, {
-            "name": "波子棋",
-            "bid": "a2",
-            "number": 4,
-            "total": 4
-        }, {
-            "name": "鬥獸棋",
-            "bid": "a3",
-            "number": 2,
-            "total": 2
-        }, {
-            "name": "飛行棋",
-            "bid": "a4",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "象棋",
-            "bid": "a5",
-            "number": 5,
-            "total": 5
-        }, {
-            "name": "UNO",
-            "bid": "a6",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "Deal",
-            "bid": "a7",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "Pictionary",
-            "bid": "a8",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "狼人",
-            "bid": "a9",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "妙探尋兇",
-            "bid": "a10",
-            "number": 1,
-            "total": 1
-        }, {
-            "name": "雨傘",
-            "bid": "a11",
-            "number": 4,
-            "total": 4
-        }];
-        lssave('Borrow_Items');
-    }
     lsload('Borrow_Items');
 
     db.exec("CREATE TABLE IF NOT EXISTS Borrow_Records (bid STRING, bhid STRING, rhid STRING, sid STRING, remarkb STRING, remarkr STRING, borrow_datetime STRING, return_datetime STRING, returned boolean)");
