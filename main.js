@@ -417,7 +417,7 @@ function sold(gid, number, hid, remark, db) {
         } else if (number <= 0) {
             alert('Are you kidding me? Buy more than 0 goods please');
         } else {
-            var really_buy = confirm('Are you realy going to buy ' + number + ' of ' + db.exec('SELECT name FROM Borrow_Items WHERE gid="' + gid + '"')[0].name + ' with $' + (db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number).toString() + ' ?');
+            var really_buy = confirm('Are you realy going to buy ' + number + ' of ' + db.exec('SELECT name FROM Sell_Items WHERE gid="' + gid + '"')[0].name + ' with $' + (db.exec('SELECT price FROM Sell_Items WHERE gid = "' + gid + '"')[0].price * number).toString() + ' ?');
             if (really_buy) {
                 db.exec('UPDATE Sell_Items SET number = ' + (number_left - number).toString() + ' WHERE gid = "' + gid + '"');
                 lssave('Sell_Items');
@@ -430,7 +430,7 @@ function sold(gid, number, hid, remark, db) {
                     record_datetime: Date().toString()
                 });
                 lssave('Sell_Records');
-                alert('Transaction success, ' + number.toString() + ' of ' + db.exec('SELECT name FROM Borrow_Items WHERE gid=' + gid)[0].name + ' sold ,' + db.exec('SELECT number FROM Sell_Items WHERE gid = "' + gid + '"')[0].number.toString() + ' left');
+                alert('Transaction success, ' + number.toString() + ' of ' + db.exec('SELECT name FROM Sell_Items WHERE gid= "' + gid + '"')[0].name + ' sold ,' + db.exec('SELECT number FROM Sell_Items WHERE gid = "' + gid + '"')[0].number.toString() + ' left');
                 return true;
             } else {
                 alert('Select item again then');
